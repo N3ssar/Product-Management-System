@@ -54,9 +54,6 @@ The **Product Management System** is a web-based application that allows users t
    - Click the theme toggle button in the header to switch between dark and light mode
 
 
-## Demo
-Project Link: [https://github.com/N3ssar/product-management-system](https://github.com/N3ssar/product-management-system)
-
 ---
 
 Made with ❤️ by [Muhammad Nassar]
