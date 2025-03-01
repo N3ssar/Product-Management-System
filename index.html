@@ -7,7 +7,9 @@
     <meta name="description"
         content="Product Management System - Create, Read, Update, and Delete products efficiently">
     <!-- Icon -->
-    <link rel="icon" href="assets/images/product-management.png">
+    <link rel="icon" href="assets/images/inventory-management.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- main Styles -->
     <link rel="stylesheet" href="assets/Css/style.css">
     <title>Product Management System</title>
@@ -16,59 +18,95 @@
 <body>
     <div class="crud">
         <header class="head">
-            <h1>CRUDS</h1>
-            <img src="assets/images/admin.png" alt="Admin icon" width="80" height="80">
-            <p>Product Management System</p>
-            <button id="btnChangeTheme" class="theme-toggle" aria-label="Toggle theme">
-                <span class="theme-toggle-text">Toggle Theme</span>
-            </button>
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="assets/images/CRUD.png" alt="Admin icon" width="60" height="60">
+                    <div class="header-text">
+                        <h1>CRUDS</h1>
+                        <p>Product Management System</p>
+                    </div>
+                </div>
+                <button id="btnChangeTheme" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon theme-icon"></i>
+                    <span class="theme-toggle-text">Dark Mode</span>
+                </button>
+            </div>
         </header>
 
         <main>
-            <section class="input-section" aria-labelledby="input-section-title">
-                <h2 id="input-section-title" class="sr-only">Product Input</h2>
+            <section class="input-section card" aria-labelledby="input-section-title">
+                <h2 id="input-section-title">Add New Product</h2>
                 <form id="productForm">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" placeholder="Enter product title" required>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" placeholder="Enter product title" required>
+                    </div>
 
                     <div class="price-inputs">
-                        <div>
+                        <div class="form-group">
                             <label for="price">Price</label>
-                            <input type="number" id="price" placeholder="Enter price" step="0.01" min="0">
+                            <div class="input-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                                <input type="number" id="price" placeholder="Enter price" step="0.01" min="0">
+                            </div>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label for="taxes">Taxes</label>
-                            <input type="number" id="taxes" placeholder="Enter taxes" step="0.01" min="0">
+                            <div class="input-icon">
+                                <i class="fas fa-percentage"></i>
+                                <input type="number" id="taxes" placeholder="Enter taxes" step="0.01" min="0">
+                            </div>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label for="ads">Ads</label>
-                            <input type="number" id="ads" placeholder="Enter ads cost" step="0.01" min="0">
+                            <div class="input-icon">
+                                <i class="fas fa-ad"></i>
+                                <input type="number" id="ads" placeholder="Enter ads cost" step="0.01" min="0">
+                            </div>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label for="discount">Discount</label>
-                            <input type="number" id="discount" placeholder="Enter discount" step="0.01" min="0">
+                            <div class="input-icon">
+                                <i class="fas fa-tags"></i>
+                                <input type="number" id="discount" placeholder="Enter discount" step="0.01" min="0">
+                            </div>
                         </div>
                     </div>
                     <div id="total" aria-live="polite"></div>
 
-                    <label for="count">Count</label>
-                    <input type="number" id="count" placeholder="Enter count" min="1">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="count">Count</label>
+                            <div class="input-icon">
+                                <i class="fas fa-list-ol"></i>
+                                <input type="number" id="count" placeholder="Enter count" min="1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <div class="input-icon">
+                                <i class="fas fa-tag"></i>
+                                <input type="text" id="category" placeholder="Enter category">
+                            </div>
+                        </div>
+                    </div>
 
-                    <label for="category">Category</label>
-                    <input type="text" id="category" placeholder="Enter category">
-
-                    <button type="submit" id="submit">Create</button>
+                    <button type="submit" id="submit">
+                        <i class="fas fa-plus-circle"></i> Create
+                    </button>
                 </form>
             </section>
 
-            <section class="output-section" aria-labelledby="output-section-title">
-                <h2 id="output-section-title" class="sr-only">Product List</h2>
+            <section class="output-section card" aria-labelledby="output-section-title">
+                <h2 id="output-section-title">Product List</h2>
                 <div class="search-block">
-                    <label for="search">Search Products</label>
-                    <input type="text" id="search" placeholder="Search">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search" placeholder="Search">
+                    </div>
                     <div class="btn-search" role="group" aria-label="Search options">
-                        <button id="searchTitle">Search By Title</button>
-                        <button id="searchCategory">Search By Category</button>
+                        <button id="searchTitle"><i class="fas fa-heading"></i> By Title</button>
+                        <button id="searchCategory"><i class="fas fa-tags"></i> By Category</button>
                     </div>
                 </div>
                 <div id="deleteAll" aria-live="polite"></div>
@@ -76,23 +114,30 @@
                     <table aria-label="Product list">
                         <thead>
                             <tr>
-                                <th scope="col">Id</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Title</th>
+                                <th scope="col">Category</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Taxes</th>
                                 <th scope="col">Ads</th>
                                 <th scope="col">Discount</th>
                                 <th scope="col">Total</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Update</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col" colspan="2">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="tBody"></tbody>
                     </table>
                 </div>
+                <div class="no-products" id="noProducts" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <p>No products found. Add your first product above!</p>
+                </div>
             </section>
         </main>
+
+        <footer>
+            <p>&copy; 2025 Product Management System. All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Main Script -->
